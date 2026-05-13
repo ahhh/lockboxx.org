@@ -69,64 +69,33 @@
             z-index: 2;
             width: 100%;
             max-width: 640px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow:
-                0 0 0 1px rgba(0, 255, 65, 0.04),
-                0 0 40px rgba(0, 255, 65, 0.08),
-                0 0 100px rgba(0, 255, 65, 0.04),
-                0 24px 80px rgba(0, 0, 0, 0.9);
+            background: transparent;
         }
 
-        /* CRT refresh sweep */
+        /* Ambient radial glow behind content */
         .terminal::before {
             content: '';
             position: absolute;
-            left: 0;
-            right: 0;
-            height: 180px;
-            background: linear-gradient(
-                to bottom,
-                transparent 0%,
-                rgba(0, 255, 65, 0.015) 35%,
-                rgba(0, 255, 65, 0.04) 50%,
-                rgba(0, 255, 65, 0.015) 65%,
+            inset: -60px;
+            background: radial-gradient(
+                ellipse 70% 60% at 50% 40%,
+                rgba(0, 255, 65, 0.045) 0%,
+                rgba(0, 255, 65, 0.012) 50%,
                 transparent 100%
             );
-            animation: sweep 9s linear infinite;
             pointer-events: none;
-            z-index: 8;
-            top: -180px;
+            z-index: 0;
         }
 
+        /* CRT sweep */
         @keyframes sweep {
             from { top: -180px; }
             to   { top: 100%; }
         }
 
-        /* Inner shadow */
-        .terminal::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-            z-index: 9;
-            border-radius: 6px;
-        }
-
         /* ── Title bar ──────────────────────── */
         .titlebar {
-            display: flex;
-            align-items: center;
-            background: rgba(0, 15, 5, 0.95);
-            border-bottom: 1px solid var(--border);
-            padding: 10px 16px;
-            gap: 12px;
-            position: relative;
-            z-index: 10;
+            display: none;
         }
 
         .tb-dots {
@@ -220,9 +189,18 @@
             color: var(--g3);
             letter-spacing: 0.28em;
             text-transform: uppercase;
-            margin-bottom: 38px;
+            margin-bottom: 16px;
             opacity: 0;
             animation: fade-up 0.5s ease forwards 1.9s;
+        }
+
+        .tagline {
+            font-size: clamp(12px, 2.2vw, 13px);
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fade-up 0.5s ease forwards 2.0s;
         }
 
         /* ── Divider ────────────────────────── */
@@ -339,7 +317,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid var(--border);
             padding: 9px 34px;
             font-size: 11px;
             color: var(--g4);
@@ -405,6 +382,8 @@
 
         <div class="subtitle">Infosec Archmage</div>
 
+        <p class="tagline">A systems-oriented security operator who combines deep technical tradecraft with programmatic and strategic thinking, helping teams and executives counter their security threats. Follow my blog, subscribe to my newsletter, or engage directly for consulting services.</p>
+
         <hr class="divider" aria-hidden="true">
 
         <nav class="links" aria-label="Links">
@@ -441,11 +420,6 @@
             <a href="https://www.amazon.com/Adversarial-Tradecraft-Cybersecurity-real-time-computer/dp/1801076200" class="link" target="_blank" rel="noopener noreferrer">
                 <span class="link-num" aria-hidden="true">07&gt;</span>
                 <span class="link-label">Book: Adversarial Tradecraft in Cybersecurity</span>
-                <span class="link-arrow" aria-hidden="true">→</span>
-            </a>
-            <a href="mailto:training@lockboxx.org" class="link">
-                <span class="link-num" aria-hidden="true">08&gt;</span>
-                <span class="link-label">Training Inquiries</span>
                 <span class="link-arrow" aria-hidden="true">→</span>
             </a>
         </nav>
